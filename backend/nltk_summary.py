@@ -3,8 +3,12 @@ from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
 import numpy as np
 
-""" These functions define how the nltk package might be used to
 """
+These functions define how the nltk package might be used to
+generate a summary when presented with a text file. This method would
+not touch ChatGPT.
+"""
+
 
 def read_article(file_name):
     file = open(file_name, "r")
@@ -17,6 +21,7 @@ def read_article(file_name):
     sentences.pop()
 
     return sentences
+
 
 def sentence_similarity(sent1, sent2, stopwords=None):
     if stopwords is None:
@@ -44,25 +49,28 @@ def sentence_similarity(sent1, sent2, stopwords=None):
 
     return 1 - cosine_distance(vector1, vector2)
 
+
 def build_similarity_matrix(sentences, stop_words):
     # Create an empty similarity matrix
     similarity_matrix = np.zeros((len(sentences), len(sentences)))
 
     for idx1 in range(len(sentences)):
         for idx2 in range(len(sentences)):
-            if idx1 == idx2: #ignore if both are same sentences
+            if idx1 == idx2:  # ignore if both are same sentences
                 continue
-            similarity_matrix[idx1][idx2] = sentence_similarity(sentences[idx1], sentences[idx2], stop_words)
+            similarity_matrix[idx1][idx2] = sentence_similarity(
+                sentences[idx1], sentences[idx2], stop_words
+            )
 
     return similarity_matrix
 
 
 def generate_summary(file_name, top_n=5):
-    stop_words = stopwords.words('english')
+    stop_words = stopwords.words("english")
     summarize_text = []
 
     # Step 1 - Read text anc split it
-    sentences =  read_article(file_name)
+    sentences = read_article(file_name)
 
     # Step 2 - Generate Similary Martix across sentences
     sentence_similarity_martix = build_similarity_matrix(sentences, stop_words)
@@ -72,4 +80,9 @@ def generate_summary(file_name, top_n=5):
     scores = nx.pagerank(sentence_similarity_graph)
 
     # Step 4 - Sort the rank and pick top sentences
-    ranked_sentence = sorted(((scores[i],s) for
+    ranked_sentence = sorted(
+        ((scores[i], s) for i, s in enumerate(sentences)), reverse=True
+    )
+    for i in range(top_n):
+        summarize_text.append(" ".join(ranked_sentence[i][1]))
+    return ". ".join(summarize_text)
