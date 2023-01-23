@@ -7,6 +7,8 @@ import numpy as np
 These functions define how the nltk package might be used to
 generate a summary when presented with a text file. This method would
 not touch ChatGPT.
+
+Installs: networkx, nltk, likely need to run nltk.download('stopwords')
 """
 
 
