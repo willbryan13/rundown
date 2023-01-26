@@ -1,10 +1,26 @@
 document.getElementById("submit-button").addEventListener("click", function () {
     // Get the input text
     var inputText = document.getElementById("input-text").value;
+    // Get the checkboxes
+    var summaryCheckbox = document.getElementById("summary_box");
+    var condenseCheckbox = document.getElementById("condense_box");
+    // Get the complexity slider
+    var complexitySlider = document.getElementById("complexity_slider");
 
-    // Send a message to the service worker with the input text
+    // check if any of the checkboxes is checked
+    if (!summaryCheckbox.checked && !condenseCheckbox.checked) {
+        // Show an error message
+        document.getElementById("message").innerHTML = "Please select at least one option";
+        return;
+    }
+    // Clear the error message
+    document.getElementById("message").innerHTML = "";
+    // Send a message to the service worker with the input text, the selected options and the complexity value
     navigator.serviceWorker.controller.postMessage({
         message: 'type',
-        input: inputText
+        input: inputText,
+        summary: summaryCheckbox.checked,
+        condense: condenseCheckbox.checked,
+        complexity: complexitySlider.value
     });
 });

@@ -3,6 +3,7 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/background.js')
             .then(registration => {
                 console.log('Service worker registered:', registration);
+                createContextMenu();
             })
             .catch(registrationError => {
                 console.log('Service worker registration failed:', registrationError);
@@ -18,4 +19,5 @@ self.addEventListener('message', event => {
         fetchData(inputText);
     }
 });
+
 

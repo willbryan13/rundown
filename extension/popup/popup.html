@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>My Chrome Extension</title>
+    <title>Rundown</title>
     <link rel="stylesheet" href="popup.css">
     <script src="popup.js"></script>
 </head>
@@ -11,10 +11,25 @@
     <form>
         <label>
             Enter text:
-            <input type="text" id="input-text">
+            <input type="text" id="input-text" name="input">
         </label>
         <br>
-        <button type="button" id="submit-button">Update text</button>
+        <div id="message"></div>
+        <br>
+        <label>
+            <input type="checkbox" id="summary_box" name="summary" value="true"> Summarize
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" id="condense_box" name="condense" value="true"> Condense
+        </label>
+        <br>
+        <label>
+            Complexity:
+            <input type="range" id="complexity_slider" name="complexity" min="1" max="10" value="10">
+        </label>
+        <br>
+        <button type="button" onclick="fetchData()">Submit</button>
     </form>
 </body>
 
