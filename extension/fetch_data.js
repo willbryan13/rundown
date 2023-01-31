@@ -2,7 +2,7 @@ function fetchData() {
     var inputText = document.getElementById("input-text").value;
     var summary = document.querySelector('input[name="summary"]:checked');
     var condense = document.querySelector('input[name="condense"]:checked');
-    var complexity = document.getElementById("complexity_slider").value;
+    var complexity = document.getElementById("complexity-slider").value;
 
     if (!inputText) {
         document.querySelector("#message").innerHTML = "Please enter some text";
@@ -15,9 +15,10 @@ function fetchData() {
     }
 
     document.querySelector("#message").innerHTML = "";
-    fetch("http://example.com/endpoint", {
+    fetch("https://prmm2b9c5h.execute-api.us-east-2.amazonaws.com/default/text-process-v1", {
         method: "POST",
         headers: {
+            "authorization": "P731s0qAZEvI5tAsBtJ822NZ8IiP0HG1W2uvVso8",
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -28,14 +29,13 @@ function fetchData() {
         })
     })
         .then(response => {
-            // handle the response
             if (response.ok) {
                 return response.json();
             }
             throw new Error("Network response was not ok.");
         })
         .then(data => {
-            // do something with the data
+            document.getElementById("input-text").value = data.processedText;
         })
         .catch(error => {
             // handle errors

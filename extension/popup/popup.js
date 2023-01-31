@@ -5,7 +5,7 @@ document.getElementById("submit-button").addEventListener("click", function () {
     var summaryCheckbox = document.getElementById("summary_box");
     var condenseCheckbox = document.getElementById("condense_box");
     // Get the complexity slider
-    var complexitySlider = document.getElementById("complexity_slider");
+    var complexitySlider = document.getElementById("complexity-slider");
 
     // check if any of the checkboxes is checked
     if (!summaryCheckbox.checked && !condenseCheckbox.checked) {
