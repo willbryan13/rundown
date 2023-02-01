@@ -1,4 +1,6 @@
-document.getElementById("submit-button").addEventListener("click", function () {
+var el = document.getElementById('submit-button');
+
+function processSubmit() {
     // Get the input text
     var inputText = document.getElementById("input-text").value;
     // Get the checkboxes
@@ -23,4 +25,8 @@ document.getElementById("submit-button").addEventListener("click", function () {
         condense: condenseCheckbox.checked,
         complexity: complexitySlider.value
     });
-});
+}
+
+if (el) {
+    el.addEventListener('click', processSubmit); 
+}
