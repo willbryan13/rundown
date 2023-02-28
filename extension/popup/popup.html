@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rundown</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js"></script>
+</head>
+
+<body>
+    <form>
+        <label>
+            Enter text:
+            <input type="text" id="input-text" name="input">
+        </label>
+        <br>
+        <div id="message"></div>
+        <br>
+        <label>
+            <input type="checkbox" id="summary_box" name="summary" value="true"> Summarize
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" id="condense_box" name="condense" value="true"> Condense
+        </label>
+        <br>
+        <label>
+            Complexity:
+            <input type="range" id="complexity-slider" name="complexity" min="1" max="10" value="10">
+        </label>
+        <br>
+        <button type="button" id="submit-button">Submit</button>
+        <script src="popup.js"></script>
+        <script src="fetch_data.js"></script>
+    </form>
+</body>
+
+</html>
